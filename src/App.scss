@@ -69,8 +69,21 @@ p {
   padding: 20px 10px 0 20px;
   margin: 20px;
   border-radius: 3000px;
-  box-shadow: 0 0 10px rgb(164, 164, 164);
+  box-shadow: 0 0 10px rgb(0, 0, 0);
   align-items: center;
+}
+
+.w-img{
+  background-color: #395dff;
+  color: white;
+  border-top-right-radius: 1000px;
+  border-bottom-right-radius: 1000px;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  flex-direction: row-reverse;
+  padding: 20px 20px 0 10px;
+  text-align: end;
+  float: right;
 }
 
 .sent {
@@ -83,11 +96,25 @@ p {
   float: right;
 }
 
+
 .received {
   border: 1px solid lightgray;
   background-color: #FAFAFA;
   border-top-left-radius: 1000px;
   float: left;
+}
+
+.w-img-received{
+  border: 1px solid lightgray;
+  background-color: #FAFAFA;
+  border-radius: 3000px;
+  border-top-left-radius: 2000px;
+  border-top-right-radius: 500px;
+  border-bottom-right-radius: 500px;
+  border-bottom-left-radius: 2000px;
+  float: left;
+  color:black;
+  flex-direction: row;
 }
 
 .sendMsg {
@@ -168,4 +195,12 @@ p {
     background-color: white;
     color: black;
   }
+}
+
+.uimgs{
+  border-radius: 25px;
+  border:none;
+  width: 70vh;
+  height: 40vh;
+  padding: 20px;
 }

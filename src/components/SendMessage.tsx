@@ -1,7 +1,8 @@
 import { Button, Input } from '@mui/material'
 import firebase from 'firebase';
-import React, { useState } from 'react'
-import { db, auth } from '../firebase';
+import React, { useRef, useState } from 'react'
+import { db, auth, imagesRef } from '../firebase';
+import { IUser } from '../Interface';
 
 
 interface IScroll {
@@ -11,16 +12,58 @@ interface IScroll {
 const SendMessage: React.FC<IScroll> = ({scroll}) => {
   
   const [msg, setMsg] = useState('');
-  const sendMessage = async (e:any) => {
+  const fileInput = useRef<HTMLInputElement>(null);
+  
+  const sendMessage = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {uid, photoURL}:any = auth.currentUser;
+    const {uid, photoURL} = auth.currentUser as IUser;
+    
+    const file = fileInput.current?.files?.[0];
+    
+    if(file && msg !== '' || file && msg == ''){
+      const fileRef = imagesRef.child(file.name);
+      const uploadTask = fileRef.put(file);
 
-    await db.collection('messages').add({
-      text: msg,
-      photoURL,
-      uid,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    })
+      uploadTask?.on('state_changed', snapshot => {
+        // Handle progress, success and error events
+        switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                console.log('Upload is paused');
+                break;
+            case firebase.storage.TaskState.RUNNING: // or 'running'
+                console.log('Upload is running');
+                break;
+        }
+    }, error => {
+        // Handle error
+        console.log(error);
+    }, async () => {
+        // Handle success
+        // Get the download URL of the file
+        const url = await fileRef.getDownloadURL();
+        console.log(url);
+        if(fileInput.current){
+          fileInput.current.value = '';
+        }
+        // Add the image URL to the message object
+        await db.collection('messages').add({
+            text: msg,
+            photoURL,
+            uid,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            imageURL: url
+        });
+    });
+  
+    }else if(msg !== ''){
+      await db.collection('messages').add({
+        text: msg,
+        photoURL,
+        uid,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    }
+
     setMsg('');
 
     if (scroll.current) {
@@ -34,6 +77,7 @@ const SendMessage: React.FC<IScroll> = ({scroll}) => {
        <div className="sendMsg">
           <Input value={msg} onChange={(e) => setMsg(e.target.value)} style={{ width: '78%', fontSize: '15px', fontWeight: '550', marginLeft: '5px', marginBottom: '-3px' }} placeholder='Message...' />
           <Button style={{ width: '18%', fontSize: '15px', fontWeight: '550', margin: '4px 5% -13px 5%', maxWidth: '200px'}} type='submit' variant="outlined" >Send</Button>
+          <input ref={fileInput} type="file"/>
        </div>
 
       </form>

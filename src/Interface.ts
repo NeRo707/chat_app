@@ -1,7 +1,13 @@
 export interface IChat {
   createdAt: number;
-  id: any;
-  uid: any;
+  id: number | string;
+  uid: string;
   text: string;
-  photoURL: any;
+  photoURL: string;
+  imageURL?: string;
+}
+
+export interface IUser{
+  uid: string;
+  photoURL: string;
 }
