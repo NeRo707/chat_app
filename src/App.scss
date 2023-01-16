@@ -143,6 +143,14 @@ p {
     border-color: #4caf50;
     background-color: #4caf50;
   }
+  .slz{
+    background-color: black;
+    color: white;
+  }
+  .slz:hover{
+    background-color: tomato;
+    color: white;
+  }
 }
 
 .msgs {
@@ -185,6 +193,7 @@ p {
 }
 
 .xzs{
+
   Button{
     height: 40px;
     background-color: orange;
@@ -195,6 +204,7 @@ p {
     background-color: white;
     color: black;
   }
+  border-bottom: none;
 }
 
 .uimgs{
@@ -203,4 +213,16 @@ p {
   width: 70vh;
   height: 40vh;
   padding: 20px;
+}
+
+.uploadz{
+  background-color: red;
+}
+
+#my-video{
+  height: 100%;
+  object-fit: cover;
+  position: fixed;
+  width: 100%;
+  z-index: -1;
 }

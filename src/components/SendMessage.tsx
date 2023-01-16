@@ -76,8 +76,11 @@ const SendMessage: React.FC<IScroll> = ({scroll}) => {
      
        <div className="sendMsg">
           <Input value={msg} onChange={(e) => setMsg(e.target.value)} style={{ width: '78%', fontSize: '15px', fontWeight: '550', marginLeft: '5px', marginBottom: '-3px' }} placeholder='Message...' />
-          <Button style={{ width: '18%', fontSize: '15px', fontWeight: '550', margin: '4px 5% -13px 5%', maxWidth: '200px'}} type='submit' variant="outlined" >Send</Button>
-          <input ref={fileInput} type="file"/>
+          <Button style={{ width: '18%', fontSize: '15px', fontWeight: '550', margin: '4px 2% -13px 1%', maxWidth: '200px'}} type='submit' variant="outlined" >Send</Button>
+          <Button className='slz' style={{ width: '18%', fontSize: '15px', fontWeight: '550', margin: '4px 3% -13px 1%', maxWidth: '200px'}} variant="contained" component="label">
+                Upload
+                <input className='uploadz' hidden accept="image/*" multiple ref={fileInput} type="file" />
+              </Button>
        </div>
 
       </form>

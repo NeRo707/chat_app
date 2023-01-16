@@ -4,6 +4,7 @@ import { IChat } from '../Interface';
 import SendMessage from './SendMessage';
 import SignOut from './SignOut';
 import classnames from 'classnames';
+import brokima from '../assets/brokima.mp4'
 const Chat = () => {
   const [messages, setMessages] = useState<IChat[]>([]);
 
@@ -42,8 +43,20 @@ const Chat = () => {
 
   return (
     <>
+  
       <SignOut />
+      <video id="my-video" autoPlay loop muted>
+        <source src={brokima} type="video/mp4" />
+      </video>  
+      <div>
+        <h6>____dasda__</h6>
+      </div>
       <div className='msgs'>
+      <video id="my-video" autoPlay loop muted>
+        
+        <source src="../assets/brokima.mp4" type="video/mp4" />
+
+      </video>
         {messages.map(( message: IChat) => (
           <div key={message.createdAt}>
               <div className={classnames('msg', { 'w-img': message.imageURL }, { 'sent': message.uid === auth.currentUser?.uid }, { 'received': message.uid !== auth.currentUser?.uid }, { 'w-img-received': message.imageURL && message.uid !== auth.currentUser?.uid })}>
@@ -60,6 +73,7 @@ const Chat = () => {
           </div>
         </>
       </div>
+
     </>
   );
 }

@@ -11,3 +11,4 @@ export interface IUser{
   uid: string;
   photoURL: string;
 }
+
