@@ -46,7 +46,7 @@ const SendMessage: React.FC<IScroll> = ({scroll}) => {
           fileInput.current.value = '';
         }
         // Add the image URL to the message object
-        await db.collection('messages').add({
+        await db.collection('messagesgit').add({
             text: msg,
             photoURL,
             uid,
@@ -56,7 +56,7 @@ const SendMessage: React.FC<IScroll> = ({scroll}) => {
     });
   
     }else if(msg !== ''){
-      await db.collection('messages').add({
+      await db.collection('messagesgit').add({
         text: msg,
         photoURL,
         uid,

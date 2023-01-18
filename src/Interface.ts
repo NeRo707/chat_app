@@ -1,6 +1,8 @@
+import firebase from "firebase";
+
 export interface IChat {
-  createdAt: number;
-  id: number | string;
+  createdAt: number ;
+  id: string;
   uid: string;
   text: string;
   photoURL: string;

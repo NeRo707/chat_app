@@ -16,7 +16,7 @@ const SignIn = () => {
 
   return (
     <div className='sigmabox'>
-      <h1 style={{color:"white"}}>SUSCHAT</h1>
+      <h1 style={{color:"white"}}>SUSICHAT</h1>
       <Button style={{color: "white",border:"1px solid white"}} variant="outlined" onClick={signInWithGoogle}>Sign In With Google</Button>
     </div>
   )
