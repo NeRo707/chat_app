@@ -77,10 +77,12 @@ const Chat = () => {
               <div className={classnames('msg', { 'w-img': message.imageURL }, { 'sent': message.uid === auth.currentUser?.uid }, { 'received': message.uid !== auth.currentUser?.uid }, { 'w-img-received': message.imageURL && message.uid !== auth.currentUser?.uid })}>
                 <img src={message.photoURL} alt="404.." />
                   <p>{message.text}</p>
-      
-                  <IconButton className='abobogaga'  aria-label="delete" onClick={() => deleteMsg(message.createdAt)}>
+                  
+                  {message.uid === auth.currentUser?.uid && (
+                    <IconButton className='abobogaga'  aria-label="delete" onClick={() => deleteMsg(message.createdAt)}>
                       <Delete/>
                     </IconButton>
+                  )}
                  
                   {message?.imageURL && <img className='uimgs' src={message?.imageURL} alt="404.." />}
               </div>
